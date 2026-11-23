@@ -1,0 +1,135 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { site } from "../data/site";
+
+const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&output=embed`;
+const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.mapQuery)}`;
+
+const socials = [
+  { label: "GitHub", href: site.social.github },
+  { label: "Google Scholar", href: site.social.scholar },
+  { label: "ORCID", href: site.social.orcid },
+  { label: "LinkedIn", href: site.social.linkedin },
+  { label: "Amrita Faculty Profile", href: site.social.facultyPage },
+].filter((s): s is { label: string; href: string } => Boolean(s.href));
+---
+
+<BaseLayout
+  title="Contact"
+  description={`Contact ${site.name} at ${site.institution}, ${site.university}.`}
+>
+  <PageHeader
+    eyebrow="Get in touch"
+    title="Contact & Join Us"
+    lead="We welcome inquiries from prospective interns, Ph.D. scholars, postdocs, and academic or industry collaborators interested in computational text analysis and language intelligence for social good."
+  />
+
+  <div class="container-page space-y-14 py-12">
+    <!-- Join / Collaborate pathways -->
+    <section id="join" class="scroll-mt-24">
+      <div class="mb-3 h-0.5 w-10 rounded-full bg-primary-600"></div>
+      <h2 class="font-serif text-2xl font-semibold text-slate-900 sm:text-3xl">
+        Opportunities to Join &amp; Collaborate
+      </h2>
+      <p class="mt-2 max-w-3xl text-slate-600">
+        Prospective B.Tech., M.Tech., and Ph.D. students or visiting researchers are encouraged to write to us with a brief introduction, your research interests, and a CV.
+      </p>
+      <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          site.joinTracks.map((track) => (
+            <div class="flex flex-col rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+              <p class="text-xs font-semibold tracking-wide text-primary-700 uppercase">
+                {track.audience}
+              </p>
+              <h3 class="mt-1.5 font-serif text-xl font-semibold text-slate-900">
+                {track.title}
+              </h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
+                {track.description}
+              </p>
+              <a
+                href={`mailto:${site.email}?subject=${encodeURIComponent(`[AmritaCTALab] Inquiry: ${track.title}`)}`}
+                class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-primary-700 hover:text-accent-600"
+              >
+                Email about {track.title} &rarr;
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Address & Campus Map -->
+    <section class="grid gap-8 lg:grid-cols-2 lg:items-stretch">
+      <div class="rounded-xl border border-slate-200 bg-white p-7 shadow-xs">
+        <h2 class="font-serif text-2xl font-semibold text-slate-900">
+          {site.name}
+        </h2>
+        <address class="mt-3 space-y-0.5 text-sm leading-relaxed text-slate-600 not-italic">
+          {site.address.map((line) => <p>{line}</p>)}
+        </address>
+
+        <dl class="mt-6 space-y-2.5 text-sm">
+          <div class="flex flex-wrap gap-2">
+            <dt class="w-24 font-medium text-slate-500">Lab Email</dt>
+            <dd>
+              <a href={`mailto:${site.email}`} class="font-medium text-primary-700 hover:underline">
+                {site.email}
+              </a>
+            </dd>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <dt class="w-24 font-medium text-slate-500">Lab Director</dt>
+            <dd>
+              <a href={`mailto:${site.piEmail}`} class="font-medium text-primary-700 hover:underline">
+                {site.piEmail}
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+        <h3 class="mt-8 text-xs font-semibold tracking-wider text-slate-500 uppercase">
+          Elsewhere
+        </h3>
+        <ul class="mt-2.5 flex flex-wrap gap-2 text-sm">
+          {
+            socials.map((s) => (
+              <li>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex rounded-full border border-slate-200 bg-paper px-3 py-1 text-xs font-medium text-slate-700 transition-colors hover:border-primary-300 hover:text-primary-700"
+                >
+                  {s.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <div class="grow overflow-hidden rounded-xl border border-slate-200 shadow-xs">
+          <iframe
+            title={`Map to ${site.shortName} at Amrita Vishwa Vidyapeetham, Amritapuri`}
+            src={mapSrc}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            class="h-80 w-full lg:h-full"
+          ></iframe>
+        </div>
+        <a
+          href={mapLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group inline-flex items-center gap-1 self-start text-sm font-medium text-primary-700 transition-colors hover:text-accent-600"
+        >
+          Open Amritapuri Campus in Google Maps
+          <span class="transition-transform group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

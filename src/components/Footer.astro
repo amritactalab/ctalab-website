@@ -1,0 +1,95 @@
+---
+import { site } from "../data/site";
+import { withBase } from "../lib/url";
+
+const year = new Date().getFullYear();
+
+const socialLinks = [
+  { label: "GitHub", href: site.social.github },
+  { label: "Google Scholar", href: site.social.scholar },
+  { label: "ORCID", href: site.social.orcid },
+  { label: "LinkedIn", href: site.social.linkedin },
+  { label: "Amrita Faculty Portal", href: site.social.facultyPage },
+].filter((l): l is { label: string; href: string } => Boolean(l.href));
+
+const linkClass = "text-slate-600 hover:text-primary-700 transition-colors";
+---
+
+<footer class="mt-20 border-t border-slate-200 bg-paper">
+  <div class="container-page grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="sm:col-span-2">
+      <div class="flex items-center gap-3">
+        <img
+          src={withBase("/icon-192.png")}
+          alt="AmritaCTALab logo"
+          width="44"
+          height="44"
+          class="h-11 w-11 rounded-full bg-white object-cover ring-1 ring-primary-200"
+        />
+        <div>
+          <p class="font-serif text-lg font-semibold text-slate-900">
+            {site.name}
+          </p>
+          <p class="text-xs font-medium tracking-wide text-primary-700 uppercase">
+            {site.tagline}
+          </p>
+        </div>
+      </div>
+      <p class="mt-4 max-w-md text-sm leading-relaxed text-slate-600">
+        {site.institution} · {site.university}, {site.campus}.
+      </p>
+      <p class="mt-1 text-sm text-slate-600">
+        Lab Director: <a href={withBase("/people/anoop-vs")} class="font-medium text-slate-800 hover:text-primary-700 hover:underline">{site.pi}</a>
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xs font-semibold tracking-wider text-slate-500 uppercase">
+        Contact
+      </h2>
+      <ul class="mt-3 space-y-1.5 text-sm">
+        <li>
+          <a href={`mailto:${site.email}`} class={linkClass}>{site.email}</a>
+        </li>
+        <li>
+          <a href={`mailto:${site.piEmail}`} class={linkClass}>{site.piEmail}</a>
+        </li>
+        <li class="pt-1 text-xs leading-relaxed text-slate-500">
+          School of Computing, Amritapuri Campus<br />
+          Kollam, Kerala 690525, India
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-xs font-semibold tracking-wider text-slate-500 uppercase">
+        Elsewhere
+      </h2>
+      <ul class="mt-3 space-y-1.5 text-sm">
+        {
+          socialLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class={linkClass}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-slate-200/80">
+    <div
+      class="container-page flex flex-col gap-1 py-4 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>© {year} {site.name} ({site.shortName}).</p>
+      <p>School of Computing · Amrita Vishwa Vidyapeetham</p>
+    </div>
+  </div>
+</footer>

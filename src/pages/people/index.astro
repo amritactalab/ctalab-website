@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../components/BaseLayout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import PersonGroup from "../../components/PersonGroup.astro";
+import { getGroupedPeople } from "../../lib/content";
+
+const groups = await getGroupedPeople();
+
+const subtitles: Record<string, string> = {
+  "Lab Director": "Leading AmritaCTALab at the School of Computing, Amrita Vishwa Vidyapeetham.",
+  "Research Interns": "Current B.Tech. and M.Tech. researchers advancing NLP and applied AI projects.",
+  Collaborators: "Academic and international research partners across institutions worldwide.",
+  Alumni: "Former research staff now building AI, data science, and engineering systems across industry and research.",
+};
+---
+
+<BaseLayout
+  title="People"
+  description="Lab director, current research interns, international collaborators, and alumni of AmritaCTALab."
+>
+  <PageHeader
+    eyebrow="The team"
+    title="People"
+    lead="The researchers, students, international collaborators, and alumni behind Amrita Computational Text Analysis Lab."
+  />
+  <div class="container-page py-12">
+    {
+      groups.map((g) => (
+        <PersonGroup
+          title={g.group}
+          subtitle={subtitles[g.group]}
+          people={g.people}
+        />
+      ))
+    }
+  </div>
+</BaseLayout>

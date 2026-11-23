@@ -1,0 +1,96 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../components/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { site } from "../data/site";
+import { withBase } from "../lib/url";
+import courseTextAnalytics from "../assets/teaching/course-1.png";
+import courseBiomedical from "../assets/teaching/course-2.png";
+import coursePythonBio from "../assets/teaching/course-3.png";
+
+const courseImages = {
+  "text-analytics": courseTextAnalytics,
+  "biomedical-informatics": courseBiomedical,
+  "python-for-biologists": coursePythonBio,
+};
+---
+
+<BaseLayout
+  title="Teaching"
+  description="Courses offered by AmritaCTALab across the School of Computing and School of Biotechnology at Amrita Vishwa Vidyapeetham."
+>
+  <PageHeader
+    eyebrow="Education & Mentorship"
+    title="Teaching"
+    lead="Courses currently offered by Dr. Anoop V. S. and AmritaCTALab across schools and departments at Amrita Vishwa Vidyapeetham, Amritapuri."
+  />
+
+  <div class="container-page py-14">
+    <div class="grid gap-8 lg:grid-cols-3">
+      {
+        site.courses.map((course) => (
+          <article class="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xs transition duration-300 hover:-translate-y-0.5 hover:border-primary-300 hover:shadow-md">
+            <div class="overflow-hidden border-b border-slate-100 bg-slate-50">
+              <Image
+                src={courseImages[course.imageKey]}
+                alt={course.title}
+                widths={[500, 900]}
+                sizes="(min-width: 1024px) 30vw, 95vw"
+                class="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              />
+            </div>
+
+            <div class="flex flex-1 flex-col p-6">
+              <p class="text-xs font-semibold tracking-wide text-primary-700 uppercase">
+                {course.school}
+              </p>
+              <h2 class="mt-2 font-serif text-2xl font-semibold text-slate-900">
+                {course.title}
+              </h2>
+              <p class="mt-1 text-xs font-medium text-slate-500">
+                Offered by{" "}
+                <a
+                  href={withBase("/people/anoop-vs")}
+                  class="text-slate-700 hover:text-primary-700 hover:underline"
+                >
+                  {course.instructor}
+                </a>
+              </p>
+              <p class="mt-3 text-sm leading-relaxed text-slate-600">
+                {course.description}
+              </p>
+
+              <div class="mt-5 border-t border-slate-100 pt-4">
+                <p class="text-[11px] font-semibold tracking-wider text-slate-500 uppercase">
+                  Key Topics
+                </p>
+                <ul class="mt-2 flex flex-wrap gap-1.5">
+                  {course.topics.map((topic) => (
+                    <li class="rounded-full bg-primary-50/70 px-2.5 py-0.5 text-xs font-medium text-primary-900">
+                      {topic}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="mt-14 rounded-2xl border border-primary-100 bg-paper p-8">
+      <h2 class="font-serif text-2xl font-semibold text-slate-900">
+        Student Research &amp; Thesis Mentorship
+      </h2>
+      <p class="mt-2 max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
+        Students enrolled in B.Tech., M.Tech., and interdisciplinary programs at Amrita Vishwa Vidyapeetham are welcome to pursue capstone projects, independent studies, and theses with AmritaCTALab in Applied NLP, SocialNLP, Biomedical Text Mining, and IndicNLP.
+      </p>
+      <a
+        href={withBase("/contact#join")}
+        class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-700 hover:text-accent-600"
+      >
+        Reach out about research supervision &rarr;
+      </a>
+    </div>
+  </div>
+</BaseLayout>

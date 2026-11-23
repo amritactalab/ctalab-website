@@ -1,0 +1,413 @@
+---
+import { withBase } from "../lib/url";
+
+/*
+  AmritaCTALab End-to-End Applied Language Intelligence Pipeline
+  Heavily inspired by Cohen Lab's animated inline-SVG pipeline, re-imagined
+  for Computational Text Analysis & Social AI:
+
+    1 SOCIETAL PROBLEM  — Real-world challenges across safety, health, climate & justice
+    2 LANGUAGE DATA     — Multilingual & low-resource Indic corpora
+    3 TEXT ANALYSIS     — Semantic text kernels, LLMs & interpretable NLP (echoing our logo!)
+    4 INTELLIGENT APPS  — Working prototypes, platforms & deployable tools
+    5 SOCIETAL IMPACT   — Measurable real-world deployment & community value
+*/
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+
+const steps = [
+  {
+    n: 1,
+    title: "Societal Problem",
+    cap: "safety, health, climate & justice",
+    href: "/research#projects",
+  },
+  {
+    n: 2,
+    title: "Language Data",
+    cap: "multilingual & Indic corpora",
+    href: "/research#indic-nlp",
+  },
+  {
+    n: 3,
+    title: "Text Analysis",
+    cap: "semantic kernels & interpretable NLP",
+    href: "/research#semantic-text",
+  },
+  {
+    n: 4,
+    title: "Intelligent Systems",
+    cap: "prototypes, LLMs & open tools",
+    href: "/research#llm-rag",
+  },
+  {
+    n: 5,
+    title: "Social Impact",
+    cap: "deployment & community value",
+    href: "/publications",
+  },
+] as const;
+---
+
+<div class:list={["cta-pipeline", className]}>
+  <ol class="steps grid grid-cols-1 gap-y-4 sm:grid-cols-3 sm:gap-x-3 sm:gap-y-8 lg:grid-cols-5">
+    {steps.map((s) => (
+      <li class={`step step-${s.n} relative`}>
+        <a
+          href={withBase(s.href)}
+          class="group flex items-center gap-4 rounded-xl px-2 py-2 text-left transition-colors hover:bg-primary-50/50 sm:flex-col sm:items-center sm:gap-0 sm:text-center"
+        >
+          <div class="icon shrink-0">
+            {s.n === 1 && (
+              /* 1. SOCIETAL PROBLEM — community nodes & dialogue bubbles */
+              <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                <g class="edges">
+                  <line x1="25" y1="50" x2="40" y2="28" />
+                  <line x1="55" y1="50" x2="40" y2="28" />
+                  <line x1="25" y1="50" x2="55" y2="50" />
+                </g>
+                <g class="bubble">
+                  <rect x="44" y="12" width="24" height="16" rx="5" />
+                  <path d="M50 28 L47 33 L54 28" />
+                  <line class="b-line" x1="50" y1="18" x2="62" y2="18" />
+                  <line class="b-line" x1="50" y1="23" x2="58" y2="23" />
+                </g>
+                <circle class="node-ring" cx="40" cy="28" r="8" />
+                <circle class="node-core" style="--i:0" cx="40" cy="28" r="3.5" />
+                <circle class="node-ring" cx="24" cy="52" r="8" />
+                <circle class="node-core" style="--i:1" cx="24" cy="52" r="3.5" />
+                <circle class="node-ring" cx="56" cy="52" r="8" />
+                <circle class="node-core" style="--i:2" cx="56" cy="52" r="3.5" />
+              </svg>
+            )}
+
+            {s.n === 2 && (
+              /* 2. LANGUAGE DATA — layered multilingual text sheets + streaming tokens */
+              <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                <rect class="sheet-back" x="14" y="13" width="36" height="46" rx="4" />
+                <rect class="sheet-front" x="23" y="20" width="38" height="48" rx="4" />
+                <g class="tokens">
+                  <line class="tok" style="--i:0" x1="30" y1="31" x2="46" y2="31" />
+                  <line class="tok-accent" style="--i:1" x1="50" y1="31" x2="54" y2="31" />
+                  <line class="tok-accent" style="--i:2" x1="30" y1="40" x2="39" y2="40" />
+                  <line class="tok" style="--i:3" x1="43" y1="40" x2="54" y2="40" />
+                  <line class="tok" style="--i:4" x1="30" y1="49" x2="52" y2="49" />
+                  <line class="tok-accent" style="--i:5" x1="30" y1="58" x2="43" y2="58" />
+                </g>
+                <circle class="lang-dot" cx="62" cy="21" r="6" />
+                <text x="62" y="24" text-anchor="middle" class="lang-glyph">अ</text>
+              </svg>
+            )}
+
+            {s.n === 3 && (
+              /* 3. TEXT ANALYSIS — document + bar analytics + magnifying glass (echoing AmritaCTALab logo!) */
+              <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                <path class="doc-shell" d="M18 14 H48 L56 22 V62 A4 4 0 0 1 52 66 H18 A4 4 0 0 1 14 62 V18 A4 4 0 0 1 18 14 Z" />
+                <line class="doc-line" x1="22" y1="25" x2="44" y2="25" />
+                <line class="doc-line" x1="22" y1="33" x2="38" y2="33" />
+                <g class="bars">
+                  <line style="--i:0" x1="23" y1="57" x2="23" y2="49" />
+                  <line style="--i:1" x1="30" y1="57" x2="30" y2="43" />
+                  <line style="--i:2" x1="37" y1="57" x2="37" y2="38" />
+                </g>
+                <g class="lens">
+                  <circle class="lens-glass" cx="50" cy="49" r="12" />
+                  <line class="lens-handle" x1="59" y1="58" x2="67" y2="66" />
+                </g>
+              </svg>
+            )}
+
+            {s.n === 4 && (
+              /* 4. INTELLIGENT SYSTEMS — neural graph + deployable app window */
+              <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                <rect class="app-win" x="14" y="16" width="52" height="46" rx="5" />
+                <line x1="14" y1="27" x2="66" y2="27" />
+                <circle class="win-dot" cx="21" cy="21.5" r="1.5" />
+                <circle class="win-dot" cx="27" cy="21.5" r="1.5" />
+                <circle class="win-dot" cx="33" cy="21.5" r="1.5" />
+                <g class="flow-links">
+                  <path d="M25 41 L40 36 L55 41" />
+                  <path d="M25 41 L40 52 L55 41" />
+                  <path d="M40 36 L40 52" />
+                </g>
+                <circle class="net-node" style="--i:0" cx="25" cy="41" r="3.2" />
+                <circle class="net-node" style="--i:1" cx="40" cy="36" r="3.2" />
+                <circle class="net-node" style="--i:2" cx="40" cy="52" r="3.2" />
+                <circle class="net-node" style="--i:3" cx="55" cy="41" r="3.2" />
+              </svg>
+            )}
+
+            {s.n === 5 && (
+              /* 5. SOCIAL IMPACT — globe + verified impact badge */
+              <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                <circle class="globe" cx="38" cy="40" r="22" />
+                <ellipse class="globe-meridian" cx="38" cy="40" rx="10" ry="22" />
+                <line class="globe-meridian" x1="17" y1="33" x2="59" y2="33" />
+                <line class="globe-meridian" x1="17" y1="47" x2="59" y2="47" />
+                <circle class="badge" cx="58" cy="56" r="11.5" />
+                <path class="badge-check" d="M52.5 56 L56.5 60 L64 51.5" />
+              </svg>
+            )}
+          </div>
+
+          <div class="sm:mt-3">
+            <p class="font-serif text-base font-medium text-slate-900 transition-colors group-hover:text-primary-700">
+              {s.title}
+            </p>
+            <p class="mt-0.5 text-xs text-slate-600">{s.cap}</p>
+          </div>
+        </a>
+      </li>
+    ))}
+  </ol>
+
+  {/* Desktop return-loop rail */}
+  <div class="loopback hidden lg:block">
+    <svg class="lb-arc" viewBox="0 0 1000 54" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <path class="lb-track" d="M900 12 C924 12 924 44 900 44 L132 44 C100 44 100 28 100 15" />
+      <path class="lb-head" d="M93 23 L100 12 L107 23" />
+    </svg>
+    <span class="lb-label">Iterate with communities &amp; refine</span>
+  </div>
+
+  {/* Mobile / tablet loop pill */}
+  <p class="mx-auto mt-6 flex w-fit items-center gap-2 rounded-full border border-primary-200 bg-primary-50/70 px-4 py-1.5 text-xs font-medium text-primary-800 lg:hidden">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="h-3.5 w-3.5">
+      <path d="M20 11a8 8 0 1 0-2.3 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M20 5v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    End-to-end applied AI loop — from societal problem to measurable impact
+  </p>
+</div>
+
+<style>
+  .cta-pipeline .icon svg {
+    width: 64px;
+    height: 64px;
+  }
+  @media (min-width: 640px) {
+    .cta-pipeline .icon svg {
+      width: 88px;
+      height: 88px;
+    }
+  }
+
+  /* Mobile vertical connector */
+  @media (max-width: 639px) {
+    .cta-pipeline .step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 39px;
+      top: 72px;
+      height: 14px;
+      width: 2px;
+      background: var(--color-primary-200);
+      transform: translateX(-1px);
+    }
+  }
+
+  /* Base strokes: editorial slate + Amrita crimson */
+  .cta-pipeline .icon :is(circle, line, path, polyline, rect, polygon, ellipse) {
+    stroke: var(--color-primary-700);
+    stroke-width: 2.1;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .cta-pipeline .edges line,
+  .cta-pipeline .globe-meridian,
+  .cta-pipeline .doc-line {
+    stroke: var(--color-primary-300);
+    stroke-width: 1.7;
+  }
+
+  .cta-pipeline .sheet-back {
+    fill: var(--color-primary-50);
+    stroke: var(--color-primary-300);
+  }
+  .cta-pipeline .sheet-front,
+  .cta-pipeline .doc-shell,
+  .cta-pipeline .app-win,
+  .cta-pipeline .bubble rect,
+  .cta-pipeline .node-ring {
+    fill: #ffffff;
+  }
+  .cta-pipeline .bubble path {
+    fill: #ffffff;
+  }
+  .cta-pipeline .b-line {
+    stroke: var(--color-accent-500);
+    stroke-width: 1.8;
+  }
+  .cta-pipeline .node-core,
+  .cta-pipeline .net-node {
+    fill: var(--color-accent-500);
+    stroke: none;
+  }
+  .cta-pipeline .tok {
+    stroke: #334155;
+    stroke-width: 2.2;
+  }
+  .cta-pipeline .tok-accent {
+    stroke: var(--color-accent-500);
+    stroke-width: 2.4;
+  }
+  .cta-pipeline .lang-dot {
+    fill: var(--color-primary-700);
+    stroke: #ffffff;
+    stroke-width: 1.5;
+  }
+  .cta-pipeline .lang-glyph {
+    fill: #ffffff;
+    stroke: none;
+    font-size: 8.5px;
+    font-weight: 700;
+    font-family: var(--font-sans);
+  }
+
+  .cta-pipeline .bars line {
+    stroke: var(--color-accent-500);
+    stroke-width: 3.2;
+  }
+  .cta-pipeline .lens-glass {
+    fill: rgba(255, 255, 255, 0.92);
+    stroke: var(--color-primary-700);
+    stroke-width: 2.6;
+  }
+  .cta-pipeline .lens-handle {
+    stroke: var(--color-primary-800);
+    stroke-width: 3.2;
+  }
+
+  .cta-pipeline .win-dot {
+    fill: var(--color-primary-300);
+    stroke: none;
+  }
+  .cta-pipeline .flow-links path {
+    stroke: var(--color-primary-300);
+    stroke-width: 1.7;
+  }
+
+  .cta-pipeline .globe {
+    fill: var(--color-primary-50);
+  }
+  .cta-pipeline .badge {
+    fill: var(--color-primary-700);
+    stroke: #ffffff;
+    stroke-width: 2;
+  }
+  .cta-pipeline .badge-check {
+    stroke: #ffffff;
+    stroke-width: 2.5;
+  }
+
+  /* Forward chevrons on desktop */
+  @media (min-width: 1024px) {
+    .cta-pipeline .step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 48px;
+      right: -6px;
+      width: 9px;
+      height: 9px;
+      border-top: 2px solid var(--color-primary-300);
+      border-right: 2px solid var(--color-primary-300);
+      transform: rotate(45deg);
+    }
+  }
+
+  /* Return loop */
+  .cta-pipeline .loopback {
+    position: relative;
+    margin-top: 0.5rem;
+  }
+  .cta-pipeline .lb-arc {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .cta-pipeline .lb-track {
+    fill: none;
+    stroke: var(--color-primary-300);
+    stroke-width: 1.9;
+    stroke-dasharray: 5 6;
+  }
+  .cta-pipeline .lb-head {
+    fill: none;
+    stroke: var(--color-primary-700);
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .cta-pipeline .lb-label {
+    position: absolute;
+    left: 50%;
+    top: 68%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 0 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary-800);
+  }
+
+  /* Subtle animations respecting reduced-motion */
+  @media (prefers-reduced-motion: no-preference) {
+    .cta-pipeline .node-core,
+    .cta-pipeline .net-node {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: cta-pulse 2.6s ease-in-out infinite;
+      animation-delay: calc(var(--i) * 0.35s);
+    }
+    .cta-pipeline .tok-accent {
+      animation: cta-highlight 3s ease-in-out infinite;
+      animation-delay: calc(var(--i) * 0.3s);
+    }
+    .cta-pipeline .bars line {
+      transform-box: fill-box;
+      transform-origin: 50% 100%;
+      animation: cta-grow 2.8s ease-in-out infinite;
+      animation-delay: calc(var(--i) * 0.25s);
+    }
+    .cta-pipeline .lens {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: cta-scan 4.2s ease-in-out infinite;
+    }
+    .cta-pipeline .flow-links path {
+      stroke-dasharray: 4 5;
+      animation: cta-flow 1.8s linear infinite;
+    }
+    .cta-pipeline .badge-check {
+      stroke-dasharray: 24;
+      animation: cta-draw 3.4s ease-in-out infinite;
+    }
+  }
+
+  @keyframes cta-pulse {
+    0%, 100% { opacity: 0.55; transform: scale(0.85); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+  @keyframes cta-highlight {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+  @keyframes cta-grow {
+    0%, 100% { transform: scaleY(0.6); opacity: 0.75; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+  @keyframes cta-scan {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-3px, -2px); }
+  }
+  @keyframes cta-flow {
+    to { stroke-dashoffset: -18; }
+  }
+  @keyframes cta-draw {
+    0% { stroke-dashoffset: 24; }
+    40%, 100% { stroke-dashoffset: 0; }
+  }
+</style>

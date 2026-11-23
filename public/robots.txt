@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://amritactalab.github.io/ctalab-website/sitemap-index.xml
